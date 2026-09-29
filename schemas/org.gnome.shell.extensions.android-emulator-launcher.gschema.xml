@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.android-emulator-launcher" path="/org/gnome/shell/extensions/android-emulator-launcher/">
+    <key name="sdk-path" type="s">
+      <default>""</default>
+      <summary>Android SDK Path</summary>
+      <description>Path to Android SDK directory</description>
+    </key>
+  </schema>
+</schemalist>

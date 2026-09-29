@@ -1,0 +1,15 @@
+{
+  "uuid": "android-emulator-launcher@kholil.dev",
+  "name": "Android Emulator Launcher",
+  "description": "Show phone icon in panel to list and launch Android AVDs.",
+  "shell-version": [
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50"
+  ],
+  "settings-schema": "org.gnome.shell.extensions.android-emulator-launcher",
+  "version": 1
+}
