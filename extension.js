@@ -65,7 +65,14 @@ class EmulatorIndicator extends PanelMenu.Button {
     _launchAvd(avd) {
         try {
             const emulatorPath = this._getEmulatorPath();
-            Gio.Subprocess.new([emulatorPath, '-avd', avd], Gio.SubprocessFlags.NONE);
+            const bootMode = this._settings?.get_string('boot-mode') || 'quick';
+            const args = [emulatorPath, '-avd', avd];
+
+            if (bootMode === 'cold') {
+                args.push('-no-snapshot-load');
+            }
+
+            Gio.Subprocess.new(args, Gio.SubprocessFlags.NONE);
         } catch (e) {
             console.error(`[AndroidEmulatorLauncher] Failed to launch AVD ${avd}: ${e}`);
         }

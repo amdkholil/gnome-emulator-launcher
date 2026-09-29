@@ -6,5 +6,10 @@
       <summary>Android SDK Path</summary>
       <description>Path to Android SDK directory</description>
     </key>
+    <key name="boot-mode" type="s">
+      <default>"quick"</default>
+      <summary>Boot Mode</summary>
+      <description>Boot mode for AVD: quick or cold</description>
+    </key>
   </schema>
 </schemalist>

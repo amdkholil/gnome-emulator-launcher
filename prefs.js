@@ -9,13 +9,13 @@ export default class AndroidEmulatorLauncherPreferences extends ExtensionPrefere
         const page = new Adw.PreferencesPage();
         const group = new Adw.PreferencesGroup({
             title: _('Android SDK Settings'),
-            description: _('Configure Android SDK directory location'),
+            description: _('Configure Android SDK directory location and boot options'),
         });
 
         const settings = this.getSettings();
         const defaultSdkPath = `${GLib.get_home_dir()}/Android/Sdk`;
 
-        const row = new Adw.ActionRow({
+        const pathRow = new Adw.ActionRow({
             title: _('Android SDK Path'),
             subtitle: _('Default: ') + defaultSdkPath,
         });
@@ -34,8 +34,24 @@ export default class AndroidEmulatorLauncherPreferences extends ExtensionPrefere
             Gio.SettingsBindFlags.DEFAULT
         );
 
-        row.add_suffix(entry);
-        group.add(row);
+        pathRow.add_suffix(entry);
+        group.add(pathRow);
+
+        const bootRow = new Adw.ComboRow({
+            title: _('Boot Mode'),
+            subtitle: _('Choose how the emulator starts'),
+            model: Gtk.StringList.new([_('Quick Boot'), _('Cold Boot')]),
+        });
+
+        const currentMode = settings.get_string('boot-mode');
+        bootRow.selected = currentMode === 'cold' ? 1 : 0;
+
+        bootRow.connect('notify::selected', () => {
+            const newMode = bootRow.selected === 1 ? 'cold' : 'quick';
+            settings.set_string('boot-mode', newMode);
+        });
+
+        group.add(bootRow);
         page.add(group);
         window.add(page);
     }
