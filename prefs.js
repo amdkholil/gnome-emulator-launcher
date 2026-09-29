@@ -40,14 +40,14 @@ export default class AndroidEmulatorLauncherPreferences extends ExtensionPrefere
         const bootRow = new Adw.ComboRow({
             title: _('Boot Mode'),
             subtitle: _('Choose how the emulator starts'),
-            model: Gtk.StringList.new([_('Quick Boot'), _('Cold Boot')]),
+            model: Gtk.StringList.new([_('Cold Boot'), _('Quick Boot')]),
         });
 
         const currentMode = settings.get_string('boot-mode');
-        bootRow.selected = currentMode === 'cold' ? 1 : 0;
+        bootRow.selected = currentMode === 'quick' ? 1 : 0;
 
         bootRow.connect('notify::selected', () => {
-            const newMode = bootRow.selected === 1 ? 'cold' : 'quick';
+            const newMode = bootRow.selected === 1 ? 'quick' : 'cold';
             settings.set_string('boot-mode', newMode);
         });
 

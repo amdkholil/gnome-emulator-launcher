@@ -65,7 +65,7 @@ class EmulatorIndicator extends PanelMenu.Button {
     _launchAvd(avd) {
         try {
             const emulatorPath = this._getEmulatorPath();
-            const bootMode = this._settings?.get_string('boot-mode') || 'quick';
+            const bootMode = this._settings?.get_string('boot-mode') || 'cold';
             const args = [emulatorPath, '-avd', avd];
 
             if (bootMode === 'cold') {
